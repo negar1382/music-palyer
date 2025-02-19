@@ -13,18 +13,15 @@ function backHandler(){
     audioElem.currentTime = now_s-5
 }
 
-function previousHandler(){
-    console.log('previous')
-    musics.forEach(function(link){
-        if(link == audioElem.src){
-            if(musics.indexOf(link)-1 < 0){
-                audioElem.src = 3
-            }
-            else{
-                audioElem.src = musics.indexOf(link)-1
-            }
-        }
-    })
+function previousHandler() {
+    console.log('previous');
+    let currentIndex = musics.indexOf(audioElem.src);
+    if (currentIndex - 1 < 0) {
+        audioElem.src = musics[musics.length - 1]; // به آخرین موسیقی برگرد
+    } else {
+        audioElem.src = musics[currentIndex - 1]; // موسیقی قبلی
+    }
+    audioElem.play(); // موسیقی جدید را پخش کن
 }
 
 
@@ -38,25 +35,21 @@ function pauseHandler(){
     audioElem.pause()
 }
 
-function nextHandler(){
-    console.log('next')
-    // console.log(musics.length)
-    musics.forEach(function(link){
-        if(link == audioElem.src){
-            if(musics.indexOf(link)+1 > musics.length-1){
-                audioElem.src = 0
-            }
-            else{
-                audioElem.src = musics.indexOf(link)+1
-            }
-        }
-    })
+function nextHandler() {
+    console.log('next');
+    let currentIndex = musics.indexOf(audioElem.src);
+    if (currentIndex + 1 > musics.length - 1) {
+        audioElem.src = musics[0]; // به اولین موسیقی برگرد
+    } else {
+        audioElem.src = musics[currentIndex + 1]; // موسیقی بعدی
+    }
+    audioElem.play(); // موسیقی جدید را پخش کن
 }
 
+let x = 1
 function quickHandler(){
     console.log('quick')
-    let x = 1
-    if(x = 2){
+    if(x == 2){
         audioElem.playbackRate = 1
         x = 1
     }
